@@ -25,7 +25,7 @@ nonUniqueElements([10, 9, 10, 10, 9, 8]) == [10, 9, 10, 10, 9]
  */
 
 function nonUniqueElements(data) {
-  data1 = [];
+  var data1 = [];
   var i;
   for (i = 0; i < data.length; i++){
     if (data.indexOf(data[i]) != data.lastIndexOf(data[i])){
@@ -34,3 +34,5 @@ function nonUniqueElements(data) {
     }
   return data1;
 }
+
+export default nonUniqueElements

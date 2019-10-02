@@ -1,3 +1,4 @@
+import convertBytesToHuman from "./convertBytesToHuman.js"
 /*
  * Необходимо покрыть все возможные
  * и невозможные кейсы. Например,
@@ -9,11 +10,11 @@
 
 
 test('Возвращает false для неправильного типа данных', () => {
-  xpect(convertBytesToHuman(-1)).toBe(false)
+  expect(convertBytesToHuman(-1)).toBe(false)
   expect(convertBytesToHuman("abcd")).toBe(false)
   expect(convertBytesToHuman(true)).toBe(false)
   expect(convertBytesToHuman(false)).toBe(false)
-  xpect(convertBytesToHuman(null)).toBe(false)
+  expect(convertBytesToHuman(null)).toBe(false)
   expect(convertBytesToHuman(undefined)).toBe(false)
 });
 
