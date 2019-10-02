@@ -26,3 +26,4 @@ function correctSentence(text) {
   }
   return text;
 }
+export default correctSentence

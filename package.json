@@ -84,6 +84,7 @@
     "test": "CI=true npm run test:engine && npm run test:unit && npm run lint",
     "test:engine": "check-engine",
     "test:sec": "npm audit || true",
+    "test:coverage": "npm test -- --coverage",
     "test:unit": "cross-env NODE_ENV=test jest",
     "lint:js": "eslint src/**/*.js",
     "lint:css": "stylelint 'client/**/*.{scss,css}' && stylelint --rd 'client/**/*.{scss,css}'",
