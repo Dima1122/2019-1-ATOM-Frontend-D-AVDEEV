@@ -18,6 +18,11 @@ correctSentence("Greetings, friends.") == "Greetings, friends."
  */
 
 function correctSentence(text) {
-  // your solution goes here
+  if (text.charAt(0)!=text.charAt(0).toUpperCase()){
+    text = text.toUpperCase().charAt(0) + text.slice(1);
+  }
+  if (text.slice(-1) != '.'){
+    text = text + '.';
+  }
   return text;
 }
