@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const template = document.createElement('template');
 template.innerHTML = `
 <style>
@@ -6,37 +7,38 @@ template.innerHTML = `
         padding: 8px;
     }
     
-    .message{
+    .messageItem{
         display: flex;
         flex-flow: column nowrap;
-        margin-right: 5px;
+        margin-right: 10px;
         float: right;
+        border-radius: 30px;
         padding: 10px;
-        max-width: 90%;
-        word-wrap: break-word;
-        max-width: 300px
+        max-width: 80%;
+        word-break: break-word;
     }
-   .message .text{
-        padding: 8px 8px;
-        background-color: rgb(0, 100, 0);
+   .messageItem .message{
+        padding: 4px 8px;
+        background-color: #29384B;
         border-radius: .8em;
-        color: rgb(224, 255, 255);
+        color: #fff;
+        overflow: hidden;
    }
-    .message .time{
-        font-size: 12px;
-        padding: 2px 8px;
+    .messageItem .timestamp{
+        font-size: 10px;
+        padding: 4px 8px;
         color: #999;
         align-self: flex-end;
     }
-    .message .name{
-      display: none;
+    .messageItem .name{
+        display: none;
     }
     
 </style>
-<div class="message">
+<div class="messageItem">
     <div class='name'></div>
-    <div class='text'></div>
-    <div class='time'></div>
+    <div class='message'></div>
+    <div class='timestamp'></div>
 </div>
 `;
 
@@ -46,21 +48,23 @@ class MessageItem extends HTMLElement {
     this._shadowRoot = this.attachShadow({ mode: 'open' });
     this._shadowRoot.appendChild(template.content.cloneNode(true));
 
-    this.$message = this._shadowRoot.querySelector('.message');
+    this.$messageItem = this._shadowRoot.querySelector('.message');
 
     this.$name = this._shadowRoot.querySelector('.name');
-    this.$text = this._shadowRoot.querySelector('.text');
-    this.$timestamp = this._shadowRoot.querySelector('.time');
+    this.$message = this._shadowRoot.querySelector('.message');
+    this.$timestamp = this._shadowRoot.querySelector('.timestamp');
+    // this.$identifier = this._shadowRoot.getElementById('identifier')
   }
 
   static get observedAttributes() {
-    return ['name', 'text', 'timestamp'];
+    return ['name', 'message', 'timestamp'];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
+    // eslint-disable-next-line default-case
     switch (name) {
-      case 'text':
-        this._text = newValue;
+      case 'message':
+        this._message = newValue;
         break;
       case 'name':
         this._name = newValue;
@@ -72,10 +76,14 @@ class MessageItem extends HTMLElement {
     this._renderMessage();
   }
 
+  connectedCallback() {
+    this._renderMessage();
+  }
+
   toObject() {
     this.messageObject = {
       name: this.$name.innerHTML,
-      text: this.$text.innerHTML,
+      message: this.$message.innerHTML,
       timestamp: this.$timestamp.innerHTML,
     };
     return this.messageObject;
@@ -83,8 +91,8 @@ class MessageItem extends HTMLElement {
 
   _renderMessage() {
     this.$name.innerHTML = this._name;
-    this.$text.innerHTML = this._text;
-    var time = new Date();
+    this.$message.innerHTML = this._message;
+    const time = new Date();
     if (this._timestamp) {
       this.$timestamp.innerHTML = this._timestamp;
     } else {

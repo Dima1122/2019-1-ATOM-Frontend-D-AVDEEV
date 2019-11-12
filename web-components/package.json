@@ -34,7 +34,9 @@
   "name": "web-components",
   "version": "1.0.0",
   "main": "webpack.config.js",
-  "dependencies": {},
+  "dependencies": {
+    "jquery": "^3.4.1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

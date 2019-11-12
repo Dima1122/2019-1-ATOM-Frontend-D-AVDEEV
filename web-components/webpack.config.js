@@ -64,5 +64,6 @@ module.exports = {
             filename: 'index.html',
             template: './index.html'
         })
-    ]
+    ], 
+	devtool: 'inline-source-map'
 };
