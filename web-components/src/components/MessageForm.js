@@ -40,12 +40,27 @@ template.innerHTML = `
         }
         .inputFrom {
             width: 100%;
-            background-color: #F7F8FA;
+            background-color: #29384B;
             
             z-index: 1;
         }
-        ::-webkit-scrollbar{
-            width: 0px;
+        
+        ::-webkit-scrollbar-track
+        {
+          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+          border-radius: 10px;
+          background-color: #29384B;
+        }
+        ::-webkit-scrollbar
+        {
+          width: 12px;
+          background-color: #29384B;
+        }
+        ::-webkit-scrollbar-thumb
+        {
+          border-radius: 10px;
+          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+          background-color: #D62929;
         }
         
         input[type=submit] {
