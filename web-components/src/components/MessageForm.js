@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const template = document.createElement('template');
 template.innerHTML = `
     <style>
@@ -5,13 +6,15 @@ template.innerHTML = `
         :host {
             width: 100%;
             height: 100%;
-            background-color: rgb(176, 224, 230) ;
+            font-family: sans-serif;
+            background-color: #CFD0D1 ;
             display: flex;
             flex-direction: column;
         }
         .header{
             width: 100%;
-            background-color: rgb(0,0,137);
+            background-color: #29384B;
+            z-index: 1;
         }
         
         .chat {
@@ -20,29 +23,9 @@ template.innerHTML = `
             flex: auto;
             flex-direction: column-reverse;
             align-content: flex-end;
-            overflow: scroll;
-            overflow-y: scroll;
+            z-index: 0;
+            overflow-y: auto;
         }
-
-        ::-webkit-scrollbar-track
-        {
-          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-          border-radius: 10px;
-          background-color: #F5F5F5;
-        }
-
-        ::-webkit-scrollbar
-        {
-          width: 12px;
-          background-color: #F5F5F5;
-        }
-        ::-webkit-scrollbar-thumb
-        {
-          border-radius: 10px;
-          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-          background-color: #D62929;
-        }
-
         .messagesList{
             width: 100%;
             display: flex;
@@ -55,11 +38,29 @@ template.innerHTML = `
             width: 100%;
             padding: 0 10px 20px 10px;
         }
-        .inputForm {
+        .inputFrom {
             width: 100%;
-            background-color: rgb(255, 250, 250);
+            background-color: #29384B;
             
             z-index: 1;
+        }
+        
+        ::-webkit-scrollbar-track
+        {
+          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+          border-radius: 10px;
+          background-color: #29384B;
+        }
+        ::-webkit-scrollbar
+        {
+          width: 12px;
+          background-color: #29384B;
+        }
+        ::-webkit-scrollbar-thumb
+        {
+          border-radius: 10px;
+          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+          background-color: #D62929;
         }
         
         input[type=submit] {
@@ -68,7 +69,7 @@ template.innerHTML = `
     </style>
     
     <div class='header'>
-        <chat-header> 
+        <chat-header>
         </chat-header>
     </div>
     <div class='chat'>
@@ -77,69 +78,88 @@ template.innerHTML = `
     </div>
     <div class='inputForm'>
         <form>
-            <div class="result"></div>
-            <form-input name="message-text" placeholder="Введите сообщение"></form-input>
-            
+            <form-input name="message-text" placeholder="Message..."></form-input>
         </form>
     </div>
 `;
 
 class MessageForm extends HTMLElement {
-    constructor() {
-      super();
-      this._shadowRoot = this.attachShadow({ mode: 'open' });
-      this._shadowRoot.appendChild(template.content.cloneNode(true));
-      this.$form = this._shadowRoot.querySelector('form');
+  constructor() {
+    super();
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._shadowRoot.appendChild(template.content.cloneNode(true));
+    this.$form = this._shadowRoot.querySelector('form');
 
-      this.$input = this._shadowRoot.querySelector('form-input');
-      this.$messagesList = this._shadowRoot.querySelector('.messagesList');
+    this.$input = this._shadowRoot.querySelector('form-input');
+    this.$messagesList = this._shadowRoot.querySelector('.messagesList');
+    this.$header = this._shadowRoot.querySelector('chat-header');
+    this.$form.addEventListener('keypress', this._onKeyPress.bind(this));
+    this.$form.addEventListener('submit', this._onSubmit.bind(this));
+    this.$input.addEventListener('ButtonClick', this._onSubmit.bind(this));
+  }
 
-      this.$form.addEventListener('submit', this._onSubmit.bind(this));
-      this.$form.addEventListener('keypress', this._onKeyPress.bind(this));
-      this.Id = 0;
-    }
-
-    connectedCallback() {
-      if ('chat ' + this.Id in localStorage) {
-        this.messages = JSON.parse(localStorage.getItem('chat ' + this.Id));
-      } else {
-        this.messages = [];
-      }
-      this.messages.forEach((msg) => {
-        let message = this.generateMessage(msg.name, msg.text, msg.timestamp);
-        this.$messagesList.appendChild(message);
-      });
-    }
-
-    _onSubmit(event) {
-      event.preventDefault();
-      if (this.$input.value.length > 0) {
-        var msg = this.generateMessage();
-        this.$input.$input.value = '';
-        var msg_storage = msg.toObject();
-        this.$messagesList.appendChild(msg);
-        this.messages.push(msg_storage);
-        localStorage.setItem('chat ' + this.Id, JSON.stringify(this.messages));
-      }
-    }
-
-    generateMessage(Name = 'Avdeev Dmitry', text = this.$input.value, time = null) {
-      var msg = document.createElement('message-item');
-      if (time) {
-        msg.setAttribute('timestamp', time);
-      }
-      msg.setAttribute('text', text);
-      msg.setAttribute('name', Name);
-
-      return msg;
-    }
-
-
-    _onKeyPress(event) {
-      if (event.keyCode === 13) {
-        this.$form.dispatchEvent(new Event('submit'));
-      }
+  _onSubmit(event) {
+    event.preventDefault();
+    if (this.$input.value.length > 0) {
+      const $message = this.generateMessage();
+      this.$input.$input.value = '';
+      this.$messagesList.appendChild($message);
+      const msgobj = $message.toObject();
+      this.messages.push(msgobj);
+      localStorage.setItem(`dialogue#${this.dialogueID}-${this.dialogueName}`, JSON.stringify(this.messages));
+      this.$input.dispatchEvent(new Event('onSubmit'));
     }
   }
 
-  customElements.define('message-form', MessageForm);
+  generateMessage(senderName = 'Avdeev Dmitry', message = this.$input.value, timestamp = null) {
+    const messageItem = document.createElement('message-item');
+    if (timestamp) {
+      messageItem.setAttribute('timestamp', timestamp);
+    }
+    messageItem.setAttribute('message', message);
+    messageItem.setAttribute('name', senderName);
+
+    return messageItem;
+  }
+
+  clrscr() {
+    this.$messagesList.innerHTML = '';
+  }
+
+  render() {
+    if (`dialogue#${this.dialogueID}-${this.dialogueName}` in localStorage) {
+      this.messages = JSON.parse(localStorage.getItem(`dialogue#${this.dialogueID}-${this.dialogueName}`));
+    } else {
+      this.messages = [];
+    }
+    this.messages.forEach((msg) => {
+      const $message = this.generateMessage(msg.name, msg.message, msg.timestamp);
+      this.$messagesList.appendChild($message);
+    });
+  }
+
+
+  _onKeyPress(event) {
+    if (event.keyCode === 13) {
+      this.$form.dispatchEvent(new Event('submit'));
+    }
+  }
+
+  static get observedAttributes() {
+    return ['dialoguename', 'dialogueid'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    // eslint-disable-next-line default-case
+    switch (name) {
+      case 'dialoguename':
+        this.dialogueName = newValue;
+        break;
+      case 'dialogueid':
+        this.dialogueID = newValue;
+        break;
+    }
+  }
+}
+
+customElements.define('message-form', MessageForm);
