@@ -25,5 +25,9 @@ module.exports = {
     'plugin/stylelint-no-indistinguishable-colors': null,
     'property-no-vendor-prefix': null,
     'csstree/validator': null,
+    'declaration-empty-line-before': null,
+    'declaration-colon-newline-after': null,
+    'declaration-block-trailing-semicolon': null,
+    'value-list-comma-newline-after': null,
   },
 }

@@ -46,8 +46,9 @@
     "import/extensions": 0,
     "import/prefer-default-export": 0,
     "import/first": 0,
+    "jsx-a11y/control-has-associated-label": 0,
     "no-tabs": ["error", { "allowIndentationTabs": true }],
-    "semi": ["error", "always"],
+    "semi": 0,
     "quotes": ["error", "single"],
     "no-mixed-spaces-and-tabs": "error"
   }
