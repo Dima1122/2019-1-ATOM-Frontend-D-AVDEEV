@@ -109,7 +109,7 @@ export class MainForm extends React.Component {
       id: chatCounter,
       title: name,
       is_group: false,
-      host: 'Vladimir Carpa',
+      host: 'Avdeev Dmitry',
       lastMessage: chatMsgs[chatMsgs.length - 1],
     })
     this.setState({ chats, chatCounter })
