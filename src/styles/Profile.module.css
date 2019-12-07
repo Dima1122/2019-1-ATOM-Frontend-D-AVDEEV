@@ -1,0 +1,126 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif;
+  background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(41, 128, 185), rgb(109, 213, 250), rgb(255, 255, 255))
+    repeat scroll 0% 0%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 1;
+  right: -100%;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.headerContainer {
+  display: flex;
+  width: 100%;
+  height: 60px;
+  background-color: #29384b;
+  flex-direction: row;
+  font-family: sans-serif;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.backButton {
+  width: 80px;
+  height: 40px;
+  background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%); /* W3C */
+  border: none;
+  border-radius: 5px;
+  position: relative;
+  border-bottom: 4px solid #2b8bc6;
+  color: #fbfbfb;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  font-size: 15px;
+  text-align: right;
+  text-indent: 5px;
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  padding: 10;
+}
+
+.backButton:after {
+  content: '';
+  width: 0;
+  height: 0;
+  display: block;
+  border-top: 20px solid #187dbc;
+  border-bottom: 20px solid #187dbc;
+  border-right: 16px solid transparent;
+  border-left: 20px solid #187dbc;
+  position: absolute;
+  opacity: 0.6;
+  left: 0;
+  top: 0;
+  border-radius: 5px 0 0 5px;
+}
+
+.editProfile {
+  flex: auto;
+  height: 100%;
+}
+
+.submitButton {
+  width: 80px;
+  height: 40px;
+  background: linear-gradient(to bottom, #4eb5e5 0%, #389ed5 100%); /* W3C */
+  border: none;
+  border-radius: 5px;
+  position: relative;
+  border-bottom: 4px solid #2b8bc6;
+  color: #fbfbfb;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  font-size: 15px;
+  text-indent: 5px;
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  padding: 10;
+  text-align: center;
+}
+
+.profile {
+  display: flex;
+  width: 60%;
+  margin: auto;
+  flex-flow: column;
+}
+
+.avatar {
+  margin: 10% auto 10% auto;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.formContainer {
+  background-color: #b5cfff;
+  margin-bottom: 5%;
+  border-bottom: 1.2px solid #29384b;
+  padding: 5px;
+}
+
+.formLabel {
+  color: #29384b;
+}
+
+.inputForm {
+  height: 30px;
+  font-size: 20px;
+}
