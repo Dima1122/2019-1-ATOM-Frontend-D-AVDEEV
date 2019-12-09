@@ -29,5 +29,6 @@ module.exports = {
     'declaration-colon-newline-after': null,
     'declaration-block-trailing-semicolon': null,
     'value-list-comma-newline-after': null,
+    'font-weight-notation': null,
   },
 }

@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
@@ -8,6 +9,7 @@ import { DialogueForm } from './DialogueForm'
 import { MessageForm } from './MessageForm'
 import { Profile } from './Profile'
 import MyContext from './MyContext.Context'
+import { recordStream } from '../lib/recordStream'
 import styles from '../styles/MainForm.module.css'
 
 export class MainForm extends React.Component {
@@ -19,6 +21,7 @@ export class MainForm extends React.Component {
       messages: storage.messages,
       chatCounter: storage.chatCounter,
       currentDialogue: null,
+      mediaRecorder: null,
       frameStyles: {
         MessageForm: null,
         Profile: null,
@@ -40,6 +43,21 @@ export class MainForm extends React.Component {
       storage.chatCounter = 0
     }
     return storage
+  }
+
+  async requireRecorder() {
+    if (this.state.mediaRecorder) {
+      return this.state.mediaRecorder
+    }
+
+    return recordStream()
+      .then((value) => {
+        this.setState({ mediaRecorder: value })
+        return value
+      })
+      .catch((err) => {
+        throw new Error(err)
+      })
   }
 
   openDialogue(chatId) {
@@ -71,8 +89,9 @@ export class MainForm extends React.Component {
     }
   }
 
-  messageHandler(value, chatTimestamp = null, chatId = null) {
+  messageHandler(value, chatTimestamp = null, chatId = null, attachments = null) {
     let { currentDialogue, messages } = this.state
+    let isAttached = false
     if (!messages) {
       messages = {}
     }
@@ -87,6 +106,23 @@ export class MainForm extends React.Component {
       amISender: true,
       time: chatTimestamp || new Date(),
       status: 'sent',
+    }
+    if (attachments) {
+      message.attachments = attachments
+      isAttached = true
+
+      const data = new FormData()
+      data.append(Attr.type, attachments.file)
+
+      fetch('https://tt-front.now.sh/upload', {
+        method: 'POST',
+        body: data,
+      })
+        .then(() => {
+          // pass
+          // eslint-disable-next-line no-console
+        })
+        .catch(console.log)
     }
     messages[currentDialogue - 1].push(message)
     this.setState(messages)
