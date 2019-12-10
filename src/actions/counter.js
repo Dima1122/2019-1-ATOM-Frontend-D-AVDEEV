@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import ActionTypes from '../constants/ActionTypes'
 import store from '../store'
 
