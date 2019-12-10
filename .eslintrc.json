@@ -49,6 +49,7 @@
     "jsx-a11y/control-has-associated-label": 0,
     "no-tabs": ["error", { "allowIndentationTabs": true }],
     "semi": 0,
+    "no-alert": 0,
     "quotes": ["error", "single"],
     "no-mixed-spaces-and-tabs": "error"
   }

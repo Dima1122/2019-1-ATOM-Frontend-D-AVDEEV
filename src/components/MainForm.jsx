@@ -1,8 +1,3 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/named */
-/* eslint-disable no-alert */
 import React from 'react'
 import { DialogueForm } from './DialogueForm'
 import { MessageForm } from './MessageForm'
@@ -19,15 +14,14 @@ export class MainForm extends React.Component {
       messages: storage.messages,
       chatCounter: storage.chatCounter,
       currentDialogue: null,
+      flag: 0,
       frameStyles: {
-        MessageForm: null,
-        Profile: null,
+        MessageForm: { animationName: styles.chatDisappear, display: 'none' },
+        Profile: { animationName: styles.chatDisappear, display: 'none' },
       },
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  // eslint-disable-next-line react/sort-comp
   parseStorage() {
     const storage = {
       chats: JSON.parse(localStorage.getItem('chats')),
@@ -46,6 +40,7 @@ export class MainForm extends React.Component {
     const { state } = this
     state.frameStyles.MessageForm = {
       animationName: styles.chatAppearance,
+      display: 'flex',
     }
     state.currentDialogue = chatId
     if (state !== this.state) {
@@ -59,6 +54,7 @@ export class MainForm extends React.Component {
       Object.keys(state.frameStyles).forEach((index) => {
         state.frameStyles[index] = {
           animationName: styles.chatDisappear,
+          display: 'flex',
         }
       })
     } else {
@@ -97,13 +93,11 @@ export class MainForm extends React.Component {
   }
 
   createHandler() {
-    // eslint-disable-next-line prefer-const
     let { chats, chatCounter } = this.state
     const name = prompt('Enter person name')
     const text = prompt('Write a message')
     chatCounter += 1
     this.messageHandler(text, new Date(), chatCounter)
-    // eslint-disable-next-line react/destructuring-assignment
     const chatMsgs = this.state.messages[chatCounter - 1]
     chats.push({
       id: chatCounter,
@@ -134,6 +128,7 @@ export class MainForm extends React.Component {
     const { state } = this
     state.frameStyles.Profile = {
       animationName: styles.chatAppearance,
+      display: 'flex',
     }
     if (state !== this.state) {
       this.setState(state)
@@ -141,20 +136,17 @@ export class MainForm extends React.Component {
   }
 
   pageRouter() {
-    // eslint-disable-next-line react/destructuring-assignment
     const path = this.props.location.pathname
-    // eslint-disable-next-line no-console
-    console.log('opening')
     switch (true) {
       case /chat\/\d\/?$/.test(path):
-        // eslint-disable-next-line no-case-declarations
         const chatid = parseInt(path.match(/\d+/), 10)
-        // eslint-disable-next-line no-console
-        console.log(chatid)
         this.openDialogue(chatid)
         break
       case /profile\/\d\/?$/.test(path):
         this.openProfile()
+        break
+      case this.state.flag === 0:
+        this.state.flag = 1
         break
       default:
         this.closeDialogue()

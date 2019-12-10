@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/named */
 import React from 'react'
 import styles from '../styles/MessageForm.module.css'
 import { ChatHeader } from './Header'

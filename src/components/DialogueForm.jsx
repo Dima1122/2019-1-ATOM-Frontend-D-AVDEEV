@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/named */
 import React from 'react'
 import styles from '../styles/DialogueForm.module.css'
 import { DialoguesHeader } from './DialoguesHeader'

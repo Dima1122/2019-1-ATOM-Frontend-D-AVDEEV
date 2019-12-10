@@ -13,11 +13,14 @@
   padding: 10px;
   max-width: 80%;
   word-break: break-word;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-name: appearance;
 }
 
 .message {
   padding: 4px 8px;
-  background-color: rgb(41, 56, 75);
+  background-color: rgb(45, 136, 42);
   border-radius: 0.4em;
   color: #fff;
 }
@@ -27,4 +30,22 @@
   padding: 4px 8px;
   color: #999;
   align-self: flex-end;
+}
+
+@keyframes appearance {
+  from {
+    right: 100%;
+  }
+
+  to {
+    right: 5px;
+  }
+}
+
+.messageItem :hover {
+  background-color: rgb(189, 167, 43);
+}
+
+.messageWrap :hover {
+  background-color: rgb(89, 96, 194);
 }

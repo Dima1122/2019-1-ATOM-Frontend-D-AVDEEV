@@ -4,7 +4,6 @@ import styles from '../styles/Profile.module.css'
 
 export function Profile(props) {
   const { style } = props
-
   return (
     <div className={styles.wrapper} style={style}>
       <div className={styles.headerContainer}>

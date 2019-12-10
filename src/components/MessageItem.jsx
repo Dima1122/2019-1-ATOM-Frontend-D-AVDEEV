@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/prefer-default-export */
 import React from 'react'
 import styles from '../styles/MessageItem.module.css'
 
