@@ -51,6 +51,7 @@
     "semi": 0,
     "no-alert": 0,
     "react/destructuring-assignment": 0,
+    "react/no-direct-mutation-state": 0,
     "quotes": ["error", "single"],
     "no-mixed-spaces-and-tabs": "error"
   }
