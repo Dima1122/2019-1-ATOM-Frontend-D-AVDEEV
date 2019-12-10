@@ -145,7 +145,8 @@ export class MainForm extends React.Component {
       case /profile\/\d\/?$/.test(path):
         this.openProfile()
         break
-      case this.state.flag === 0:
+      case this.tate.flag === 0:
+        // eslint-disable-next-line react/no-direct-mutation-state
         this.state.flag = 1
         break
       default:
