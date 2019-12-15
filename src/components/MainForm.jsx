@@ -4,6 +4,7 @@ import { MessageForm } from './MessageForm'
 import { Profile } from './Profile'
 import MyContext from './MyContext.Context'
 import styles from '../styles/MainForm.module.css'
+//скачать classNames
 
 export class MainForm extends React.Component {
   constructor(props) {

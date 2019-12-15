@@ -1,7 +1,3 @@
-/* eslint-disable import/no-named-as-default */
-/* eslint-disable import/no-named-as-default-member */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
