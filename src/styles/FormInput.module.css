@@ -32,12 +32,13 @@ input {
   color: rgb(255, 255, 255);
   font-size: 15px;
   text-transform: uppercase;
+  text-align: center;
   background: #389ed5;
   border-width: 0;
   box-shadow: 5px 5px 0 #532831;
   outline: none;
   cursor: pointer;
-  transition: 1.5s;
+  transition: 0.1s;
 }
 
 .sendButton:before,
@@ -90,8 +91,9 @@ input {
   margin: 0 15px;
   cursor: pointer;
   opacity: 0.5;
-  transition-duration: 0.15s;
+  transition-duration: 0.01s;
   z-index: 1;
+  top: 50%;
 }
 
 .inputButton:hover {

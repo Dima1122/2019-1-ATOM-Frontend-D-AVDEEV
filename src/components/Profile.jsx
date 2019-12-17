@@ -9,7 +9,7 @@ export function Profile(props) {
     <div className={styles.wrapper} style={style}>
       <div className={styles.headerContainer}>
         <div className={styles.header}>
-          <Link to={'/'} style={{ textDecoration: 'none', color: 'unset' }}>
+          <Link to="/" style={{ textDecoration: 'none', color: 'unset' }}>
             <button className={styles.backButton}>Back</button>
           </Link>
           <button className={styles.submitButton}>Edit Profile</button>

@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 export function findMe(callbackSuccess, callbackError = null) {
   if ('geolocation' in navigator) {
     const geoOptions = {

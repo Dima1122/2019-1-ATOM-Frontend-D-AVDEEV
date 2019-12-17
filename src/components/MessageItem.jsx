@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import React from 'react'
 import styles from '../styles/MessageItem.module.css'
 

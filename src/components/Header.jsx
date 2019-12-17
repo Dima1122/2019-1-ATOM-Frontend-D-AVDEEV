@@ -1,14 +1,12 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from '../styles/Header.module.css'
 
-// eslint-disable-next-line import/prefer-default-export
 export function ChatHeader(props) {
   const { details, clickBack } = props
   return (
     <div className={styles.header}>
-      <Link to={'/'}>
+      <Link to="/">
         <button onClick={clickBack} className={styles.Backbutton}>
           Back
         </button>

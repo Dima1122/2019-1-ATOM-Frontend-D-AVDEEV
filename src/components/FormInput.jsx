@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import React from 'react'
 import styles from '../styles/FormInput.module.css'
 import { findMe } from '../lib/findMe'
@@ -197,7 +196,6 @@ export function FormInput(props) {
                     })
                   },
                 )
-                // eslint-disable-next-line no-console
               })
               .catch(console.log)
           }}
@@ -304,7 +302,11 @@ function SendButton(props) {
       content = <div onClick={record} className={`${styles.inputButton} ${styles.micButton}`} />
       break
     case 'send':
-      content = <div onClick={submit} className={`${styles.inputButton} ${styles.sendButton}`} />
+      content = (
+        <div onClick={submit} className={`${styles.sendButton}`}>
+          Send
+        </div>
+      )
       break
     case 'cancel':
       content = <div onClick={cancel} className={`${styles.inputButton} ${styles.cancelButton}`} />

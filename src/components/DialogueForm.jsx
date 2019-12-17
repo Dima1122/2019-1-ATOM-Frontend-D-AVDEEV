@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/named */
 import React from 'react'
 import styles from '../styles/DialogueForm.module.css'
 import { DialoguesHeader } from './DialoguesHeader'
@@ -7,7 +5,6 @@ import { DialogueItem } from './DialogueItem'
 import { CreateDialogueButton } from './CreateDialogueButton'
 import MyContext from './MyContext.Context'
 
-// eslint-disable-next-line import/prefer-default-export
 export function DialogueForm(props) {
   const { chats } = props
 

@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/named */
 import React from 'react'
 import styles from '../styles/MessageForm.module.css'
 import { ChatHeader } from './Header'
@@ -14,12 +11,6 @@ export function MessageForm(props) {
   const [dragFiles, setDragFiles] = React.useState(null)
 
   const dragOver = (event) => {
-    /* console.log(event.dataTransfer.files);
-    if (event.dataTransfer.files[0].type.split('\\')[0] == 'image') {
-        isImage = true;
-    } else {
-        isImage = false;
-    } */
     event.preventDefault()
     event.stopPropagation()
     setDragActive(true)
