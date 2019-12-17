@@ -1,9 +1,11 @@
 language: node_js
 node_js:
-  - "stable"
+  - 'stable'
+before_install:
+  - cd ./exam
 cache:
   directories:
-  - node_modules
+    - ./exam/node_modules
 script:
   - npm lint
   - npm test
