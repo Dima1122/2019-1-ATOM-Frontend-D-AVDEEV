@@ -2,22 +2,20 @@ language: node_js
 node_js:
   - 'stable'
 before_install:
-  - cd ./exam
+  - cd exam
 cache:
   directories:
-    - ./exam/node_modules
+    - node_modules
 script:
-  - npm lint
-  - npm test
-  - npm run test:coverage
   - npm run build
 
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $repo_token
-  local_dir: build
+  local_dir: exam/build
   on:
     branch:
       - master
       - devel
+      - exam

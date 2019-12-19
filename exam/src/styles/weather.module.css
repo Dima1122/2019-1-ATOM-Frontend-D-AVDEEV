@@ -1,0 +1,15 @@
+.containerW {
+  display: flex;
+  background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(41, 128, 185), rgb(109, 213, 250), rgb(255, 255, 255))
+    repeat scroll 0% 0%;
+  height: 100vh;
+}
+
+.weatherList {
+  width: 100%;
+  display: flex;
+  flex-flow: column-reverse nowrap;
+  overflow-y: auto;
+  max-width: 60%;
+  margin: auto;
+}

@@ -1,8 +1,7 @@
 import React from 'react'
-import './App.css'
-import Weather from './components/weather.component'
-import Form from './components/form.component'
-
+import Main from './components/mainForm.component'
+import DetailView from './components/detailView.component'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import * as actions from './actions/fetchWeather'
 import { connect } from 'react-redux'
 
@@ -10,8 +9,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Form loadWeather={this.props.loadWeather} />
-        <Weather weatherInfo={this.props.weatherInfo.weatherinfo} />
+        <Router>
+          <Route exact path="/" component={Main} />
+          <Route path="/location/:id" component={DetailView} />
+        </Router>
       </div>
     )
   }
@@ -21,8 +22,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  loadWeather: (city) => dispatch(actions.fetchWeather(city)),
-  loadWeatherByGeo: () => dispatch(actions.fetchWeatherByGeo()),
+  loadWeather: (arg, method) => dispatch(actions.fetchWeather(arg, method)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

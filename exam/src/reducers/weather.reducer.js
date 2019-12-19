@@ -5,10 +5,15 @@ const weatherInfo = (
   action,
 ) => {
   if (action.type === 'FETCH_WEATHER') {
-    state = { ...state, weatherinfo: [...state.weatherinfo, action.payload] }
-  }
-  if (action.type === 'FETCH_WEATHER_GEO') {
-    state = { ...state, weatherinfo: [...state.weatherinfo, action.payload] }
+    let flag = false
+    state.weatherinfo.forEach((weather) => {
+      if (weather && weather.id === action.payload.id) {
+        flag = true
+      }
+    })
+    if (!flag) {
+      state = { ...state, weatherinfo: [...state.weatherinfo, action.payload] }
+    }
   }
   return state
 }

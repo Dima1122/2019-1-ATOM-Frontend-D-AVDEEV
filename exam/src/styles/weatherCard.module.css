@@ -1,0 +1,36 @@
+.cardContainer {
+  font-family: sans-serif;
+  color: #000;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  cursor: pointer;
+  padding: 6px 0px 6px 0px;
+  border: 1px solid rgb(17, 0, 252);
+  background-color: #b5cfff;
+  margin: 5px 0px 5px 0px;
+  z-index: 100;
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+}
+
+.upper {
+  display: flex;
+  border-bottom: 0.5px solid lightgray;
+}
+
+.upperLeft {
+  display: flex;
+  flex-flow: column;
+}
+
+.upperRight {
+  display: flex;
+  flex-flow: column;
+}
+
+.cardContainer :hover {
+  background-color: #4e4edf;
+}

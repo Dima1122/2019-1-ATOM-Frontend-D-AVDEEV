@@ -1,28 +1,55 @@
 import React from 'react'
 import kelvinToCelsius from '../utils/convertUnits'
 import styles from '../styles/weatherCard.module.css'
+import { Link } from 'react-router-dom'
 
 const WeatherCard = (props) => {
-  const { info } = props
-  return (
-    <div className={styles.dialogueweather}>
-      <div className="upper">
-        <div className="left">
-          <div className="city">{info.name}</div>
-          <div className="cityCountry">
-            {info.name}, {info.sys.country}
+  const { info, isDetail } = props
+  const time = new Date(info.dt_txt).toLocaleString('ru-RU')
+
+  if (isDetail) {
+    return (
+      <div className={styles.cardContainer}>
+        <div className={styles.upper}>
+          <div className={styles.upperLeft}>
+            <div className="city">{info.name}</div>
+            <div className="cityCountry">
+              {info.name}, {info.sys.country}
+            </div>
+          </div>
+          <div className={styles.upperRight}>
+            <div className="weatherIcon"></div>
+            <div className="temperature">{kelvinToCelsius(info.main.temp)}℃;</div>
           </div>
         </div>
-        <div className="right">
-          <div className="weatherIcon"></div>
-          <div className="temperature">{kelvinToCelsius(info.main.temp)}&deg;</div>
+        <div className={styles.lower}>
+          <div className="left">Humidity: {info.main.humidity}%</div>
+          <div className="right">{info.dt_txt ? time : null}</div>
         </div>
       </div>
-      <div className="lower">
-        <div className="left">{info.main.humidity}%</div>
-        <div className="right"></div>
+    )
+  }
+  return (
+    <Link to={`/location/${info.id}`}>
+      <div className={styles.cardContainer}>
+        <div className={styles.upper}>
+          <div className={styles.upperLeft}>
+            <div className="city">{info.name}</div>
+            <div className="cityCountry">
+              {info.name}, {info.sys.country}
+            </div>
+          </div>
+          <div className={styles.upperRight}>
+            <div className="weatherIcon"></div>
+            <div className="temperature">{kelvinToCelsius(info.main.temp)}℃;</div>
+          </div>
+        </div>
+        <div className={styles.lower}>
+          <div className="left">Humidity: {info.main.humidity}%</div>
+          <div className="right">{info.dt_txt ? time : null}</div>
+        </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
