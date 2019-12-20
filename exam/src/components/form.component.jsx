@@ -14,7 +14,7 @@ const Form = (props) => {
   }
 
   return (
-    <div className="container">
+    <div className="Container">
       <form onSubmit={processSubmit} className={styles.form}>
         <input className={styles.input} type="text" placeholder="City" name="city"></input>
         <button className={styles.btn}>Search</button>
