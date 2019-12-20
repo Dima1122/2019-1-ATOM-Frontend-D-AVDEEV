@@ -7,9 +7,10 @@ import { connect } from 'react-redux'
 
 class App extends React.Component {
   render() {
+    console.log()
     return (
       <div className="App">
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <Route exact path="/" component={Main} />
           <Route path="/location/:id" component={DetailView} />
         </Router>
