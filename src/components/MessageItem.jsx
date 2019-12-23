@@ -35,8 +35,6 @@ export function MessageItem(props) {
 function Attachment(props) {
   const { name, path } = props.attachment
   const { type } = props
-  const [isPlaying, setPlayStatus] = React.useState(false)
-  const audio = React.useRef(null)
   let content = null
 
   switch (type) {
@@ -61,32 +59,6 @@ function Attachment(props) {
       break
     case 'image':
       content = <img alt={name} src={path} className={styles.image} />
-      break
-    case 'audio':
-      const play = () => {
-        if (!isPlaying) {
-          audio.current.play()
-          setPlayStatus(true)
-        } else {
-          audio.current.pause()
-          setPlayStatus(false)
-        }
-      }
-
-      const stop = () => {
-        setPlayStatus(false)
-      }
-
-      const statusStyle = !isPlaying ? styles.audioPlay : styles.audioStop
-
-      content = (
-        <div onClick={play}>
-          <div className={styles.attachment}>
-            <div className={`${styles.audioStatus} ${statusStyle}`} />
-          </div>
-          <audio onEnded={stop} ref={audio} src={path} />
-        </div>
-      )
       break
     default:
       break

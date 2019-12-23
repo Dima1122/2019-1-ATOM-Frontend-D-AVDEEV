@@ -3,7 +3,6 @@ import { DialogueForm } from './DialogueForm'
 import { MessageForm } from './MessageForm'
 import { Profile } from './Profile'
 import MyContext from './MyContext.Context'
-import { recordStream } from '../lib/recordStream'
 import styles from '../styles/MainForm.module.css'
 
 export class MainForm extends React.Component {
@@ -15,7 +14,6 @@ export class MainForm extends React.Component {
       messages: storage.messages,
       chatCounter: storage.chatCounter,
       currentDialogue: null,
-      mediaRecorder: null,
       flag: 0,
       frameStyles: {
         MessageForm: { animationName: styles.chatDisappear, display: 'none' },
@@ -36,21 +34,6 @@ export class MainForm extends React.Component {
       storage.chatCounter = 0
     }
     return storage
-  }
-
-  async requireRecorder() {
-    if (this.state.mediaRecorder) {
-      return this.state.mediaRecorder
-    }
-
-    return recordStream()
-      .then((value) => {
-        this.setState({ mediaRecorder: value })
-        return value
-      })
-      .catch((err) => {
-        throw new Error(err)
-      })
   }
 
   openDialogue(chatId) {

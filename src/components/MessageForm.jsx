@@ -51,7 +51,7 @@ export function MessageForm(props) {
         <MyContext.Consumer>
           {(value) => (
             <FormInput
-              requireRecorder={value.requireRecorder.bind(value)}
+              // requireRecorder={value.requireRecorder.bind(value)}
               mediaRecorder={value.state.mediaRecorder}
               messageHandler={value.messageHandler.bind(value)}
               dragFiles={[dragFiles, setDragFiles]}

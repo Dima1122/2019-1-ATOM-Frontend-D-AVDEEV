@@ -1,16 +1,15 @@
 import React from 'react'
 import styles from '../styles/FormInput.module.css'
 import { findMe } from '../lib/findMe'
-import { startRecord, stopRecord } from '../lib/voiceRecord'
 
 export function FormInput(props) {
   const input = React.useRef(null)
-  const { messageHandler, requireRecorder, mediaRecorder } = props
+  const { messageHandler } = props
   const [dragFiles, setDragFiles] = props.dragFiles
   const [dropOutStyle, setDropOutStyle] = React.useState(null)
   const [attachments, setAttachments] = React.useState(null)
   const [sendButtonType, setSendButtonType] = React.useState('mic')
-  const [recording, setRecording] = React.useState(false)
+  const recording = React.useState(false)
   let attachmentsBoxStyles = null
   let list = null
   const img = React.useRef(null)
@@ -61,17 +60,7 @@ export function FormInput(props) {
     setDragFiles(null)
   }
 
-  const recordStatus = (status) => {
-    if (recording !== status) {
-      setRecording(status)
-    }
-  }
-
-  if (recording) {
-    if (sendButtonType !== 'cancel') {
-      setSendButtonType('cancel')
-    }
-  } else if ((input.current && input.current.value !== '') || attachments) {
+  if ((input.current && input.current.value !== '') || attachments) {
     if (sendButtonType !== 'send') {
       setSendButtonType('send')
     }
@@ -166,42 +155,7 @@ export function FormInput(props) {
           ref={input}
           placeholder="Enter message..."
         />
-        <SendButton
-          cancel={() => {
-            stopRecord(mediaRecorder, () => {
-              recordStatus(false)
-            })
-          }}
-          record={() => {
-            requireRecorder()
-              .then((media) => {
-                startRecord(
-                  media,
-                  () => {
-                    recordStatus(true)
-                  },
-                  () => {
-                    recordStatus(false)
-                  },
-                  (audioURL, blob) => {
-                    setAttachments({
-                      type: 'audio',
-                      list: [
-                        {
-                          name: 'Аудиозапись',
-                          path: audioURL,
-                          file: blob,
-                        },
-                      ],
-                    })
-                  },
-                )
-              })
-              .catch(console.log)
-          }}
-          submit={onSubmit}
-          type={sendButtonType}
-        />
+        <SendButton submit={onSubmit} type={sendButtonType} />
         <div className={styles.dropOut} style={dropOutStyle}>
           <div className={styles.dropOutContainer}>
             <div
@@ -274,9 +228,6 @@ function Attachment(props) {
     case 'geolocation':
       addStyle.backgroundImage = 'url(https://image.flaticon.com/icons/svg/854/854878.svg)'
       break
-    case 'audio':
-      addStyle.backgroundImage = 'url(https://image.flaticon.com/icons/svg/117/117114.svg)'
-      break
     default:
       break
   }
@@ -293,13 +244,13 @@ function Attachment(props) {
 }
 
 function SendButton(props) {
-  const { submit, record, cancel, type } = props
+  const { submit, type } = props
 
   let content = null
 
   switch (type) {
     case 'mic':
-      content = <div onClick={record} className={`${styles.inputButton} ${styles.micButton}`} />
+      content = <div className={`${styles.inputButton} ${styles.micButton}`} />
       break
     case 'send':
       content = (
@@ -308,12 +259,8 @@ function SendButton(props) {
         </div>
       )
       break
-    case 'cancel':
-      content = <div onClick={cancel} className={`${styles.inputButton} ${styles.cancelButton}`} />
-      break
     default:
       break
   }
-
   return content
 }
