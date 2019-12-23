@@ -17,3 +17,4 @@ deploy:
     branch:
       - master
       - devel
+      - hw_7_devel
