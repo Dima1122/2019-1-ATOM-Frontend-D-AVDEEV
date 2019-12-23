@@ -9,7 +9,6 @@ export function FormInput(props) {
   const [dropOutStyle, setDropOutStyle] = React.useState(null)
   const [attachments, setAttachments] = React.useState(null)
   const [sendButtonType, setSendButtonType] = React.useState('mic')
-  const recording = React.useState(false)
   let attachmentsBoxStyles = null
   let list = null
   const img = React.useRef(null)
