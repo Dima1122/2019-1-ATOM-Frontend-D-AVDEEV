@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const template = document.createElement('template');
+const template = document.createElement('template')
 template.innerHTML = `
 <style>
     *{
@@ -92,21 +92,20 @@ template.innerHTML = `
     </div>
 </div>
 <input type="image" class='settingsButton' src='https://im0-tub-ru.yandex.net/i?id=48aff79a613972e36ec3fe0bb6886909&n=13'/>
-`;
-
+`
 
 class ChatHeader extends HTMLElement {
   constructor() {
-    super();
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._shadowRoot.appendChild(template.content.cloneNode(true));
-    this.$backButton = this.shadowRoot.querySelector('.Backbutton');
-    this.$backButton.addEventListener('click', this.backButtonClick.bind(this));
+    super()
+    this._shadowRoot = this.attachShadow({ mode: 'open' })
+    this._shadowRoot.appendChild(template.content.cloneNode(true))
+    this.$backButton = this.shadowRoot.querySelector('.Backbutton')
+    this.$backButton.addEventListener('click', this.backButtonClick.bind(this))
   }
 
   backButtonClick() {
-    this.dispatchEvent(new Event('backButtonClick', { composed: true }));
+    this.dispatchEvent(new Event('backButtonClick', { composed: true }))
   }
 }
 
-customElements.define('chat-header', ChatHeader);
+customElements.define('chat-header', ChatHeader)

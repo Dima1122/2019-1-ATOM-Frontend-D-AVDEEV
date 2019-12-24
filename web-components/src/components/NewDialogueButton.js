@@ -1,7 +1,6 @@
-
 /* eslint-disable no-alert */
 /* eslint-disable no-underscore-dangle */
-const template = document.createElement('template');
+const template = document.createElement('template')
 template.innerHTML = `
 <style>
     
@@ -33,21 +32,21 @@ template.innerHTML = `
     
 </style>
 <button class='createDialogueButton'></button>
-`;
+`
 
 class CreateButton extends HTMLElement {
   constructor() {
-    super();
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._shadowRoot.appendChild(template.content.cloneNode(true));
+    super()
+    this._shadowRoot = this.attachShadow({ mode: 'open' })
+    this._shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$button = this.shadowRoot.querySelector('button');
+    this.$button = this.shadowRoot.querySelector('button')
   }
 
   static openForm() {
-    const person = prompt('Enter nickname to start conversation');
-    return person;
+    const person = prompt('Enter nickname to start conversation')
+    return person
   }
 }
 
-customElements.define('create-button', CreateButton);
+customElements.define('create-button', CreateButton)

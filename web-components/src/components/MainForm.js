@@ -1,5 +1,4 @@
-
-const template = document.createElement('template');
+const template = document.createElement('template')
 template.innerHTML = `
 <style>
   .container{
@@ -53,59 +52,61 @@ template.innerHTML = `
   <dialogue-form></dialogue-form>
   <message-form></message-form>
 </div>
-`;
+`
 
 class MainForm extends HTMLElement {
   constructor() {
-    super();
+    super()
 
-    this.shadowRoot = this.attachShadow({ mode: 'open' });
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+    this.shadowRoot = this.attachShadow({ mode: 'open' })
+    this.shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$container = this.shadowRoot.querySelector('.container');
-    this.$dialogForm = this.shadowRoot.querySelector('dialogue-form');
-    this.$messageForm = this.shadowRoot.querySelector('message-form');
+    this.$container = this.shadowRoot.querySelector('.container')
+    this.$dialogForm = this.shadowRoot.querySelector('dialogue-form')
+    this.$messageForm = this.shadowRoot.querySelector('message-form')
 
-    this.openDialogueEvent();
-    this.$dialogForm.$button.addEventListener('newDialogue', () => this.openDialogueEvent());
+    this.openDialogueEvent()
+    this.$dialogForm.$button.addEventListener('newDialogue', () => this.openDialogueEvent())
   }
 
   openDialogueEvent() {
     if (this.dialogueIds === undefined) {
-      this.dialogueIds = [];
+      this.dialogueIds = []
     }
     Object.entries(localStorage).forEach((dlg) => {
-      const key = dlg[0];
-      if ((key.includes('dialogue')) && !(key in this.dialogueIds)) {
-        const [currentId, currentName] = [...key.split('#')[1].split('-')];
-        const clickableDialogue = this.$dialogForm.$dialoguesList.querySelector(`dialogue-item[dialogueid="${currentId}"]`);
-        clickableDialogue.addEventListener('click', () => this.openDialogue(currentId, currentName));
-        this.dialogueIds.push(currentId);
+      const key = dlg[0]
+      if (key.includes('dialogue') && !(key in this.dialogueIds)) {
+        const [currentId, currentName] = [...key.split('#')[1].split('-')]
+        const clickableDialogue = this.$dialogForm.$dialoguesList.querySelector(
+          `dialogue-item[dialogueid="${currentId}"]`,
+        )
+        clickableDialogue.addEventListener('click', () => this.openDialogue(currentId, currentName))
+        this.dialogueIds.push(currentId)
       }
-    });
+    })
   }
 
   openDialogue(dialogueId, dialogueName) {
-    this.$messageForm.setAttribute('dialogueid', dialogueId);
-    this.$messageForm.setAttribute('dialoguename', dialogueName);
-    this.$messageForm.classList.remove('disappear');
-    this.$messageForm.classList.add('appear');
-    this.$messageForm.render();
-    this.$messageForm.$header.addEventListener('backButtonClick', () => this.closeDialogue());
-    this.$messageForm.$input.addEventListener('onSubmit', () => this.refreshDialogue(dialogueId));
+    this.$messageForm.setAttribute('dialogueid', dialogueId)
+    this.$messageForm.setAttribute('dialoguename', dialogueName)
+    this.$messageForm.classList.remove('disappear')
+    this.$messageForm.classList.add('appear')
+    this.$messageForm.render()
+    this.$messageForm.$header.addEventListener('backButtonClick', () => this.closeDialogue())
+    this.$messageForm.$input.addEventListener('onSubmit', () => this.refreshDialogue(dialogueId))
   }
 
   closeDialogue() {
-    this.$messageForm.clrscr();
-    this.$messageForm.classList.remove('appear');
-    this.$messageForm.classList.add('disappear');
+    this.$messageForm.clrscr()
+    this.$messageForm.classList.remove('appear')
+    this.$messageForm.classList.add('disappear')
   }
 
   refreshDialogue(dialogueId) {
-    const dialogue = this.$dialogForm.$dialoguesList.querySelector(`dialogue-item[dialogueid="${dialogueId}"]`);
+    const dialogue = this.$dialogForm.$dialoguesList.querySelector(`dialogue-item[dialogueid="${dialogueId}"]`)
     // eslint-disable-next-line no-underscore-dangle
-    dialogue._renderMessage();
+    dialogue._renderMessage()
   }
 }
 
-customElements.define('main-form', MainForm);
+customElements.define('main-form', MainForm)
