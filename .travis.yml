@@ -5,9 +5,7 @@ cache:
   directories:
     - node_modules
 script:
-  - npm run test
   - npm run build
-
 deploy:
   provider: pages
   skip_cleanup: true
@@ -18,3 +16,4 @@ deploy:
       - master
       - devel
       - hw_7_devel
+      - exam

@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const template = document.createElement('template');
+const template = document.createElement('template')
 template.innerHTML = `
 <style>
     :host {
@@ -40,44 +40,44 @@ template.innerHTML = `
     <div class='message'></div>
     <div class='timestamp'></div>
 </div>
-`;
+`
 
 class MessageItem extends HTMLElement {
   constructor() {
-    super();
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._shadowRoot.appendChild(template.content.cloneNode(true));
+    super()
+    this._shadowRoot = this.attachShadow({ mode: 'open' })
+    this._shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$messageItem = this._shadowRoot.querySelector('.message');
+    this.$messageItem = this._shadowRoot.querySelector('.message')
 
-    this.$name = this._shadowRoot.querySelector('.name');
-    this.$message = this._shadowRoot.querySelector('.message');
-    this.$timestamp = this._shadowRoot.querySelector('.timestamp');
+    this.$name = this._shadowRoot.querySelector('.name')
+    this.$message = this._shadowRoot.querySelector('.message')
+    this.$timestamp = this._shadowRoot.querySelector('.timestamp')
     // this.$identifier = this._shadowRoot.getElementById('identifier')
   }
 
   static get observedAttributes() {
-    return ['name', 'message', 'timestamp'];
+    return ['name', 'message', 'timestamp']
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     // eslint-disable-next-line default-case
     switch (name) {
       case 'message':
-        this._message = newValue;
-        break;
+        this._message = newValue
+        break
       case 'name':
-        this._name = newValue;
-        break;
+        this._name = newValue
+        break
       case 'timestamp':
-        this._timestamp = newValue;
-        break;
+        this._timestamp = newValue
+        break
     }
-    this._renderMessage();
+    this._renderMessage()
   }
 
   connectedCallback() {
-    this._renderMessage();
+    this._renderMessage()
   }
 
   toObject() {
@@ -85,23 +85,23 @@ class MessageItem extends HTMLElement {
       name: this.$name.innerHTML,
       message: this.$message.innerHTML,
       timestamp: this.$timestamp.innerHTML,
-    };
-    return this.messageObject;
+    }
+    return this.messageObject
   }
 
   _renderMessage() {
-    this.$name.innerHTML = this._name;
-    this.$message.innerHTML = this._message;
-    const time = new Date();
+    this.$name.innerHTML = this._name
+    this.$message.innerHTML = this._message
+    const time = new Date()
     if (this._timestamp) {
-      this.$timestamp.innerHTML = this._timestamp;
+      this.$timestamp.innerHTML = this._timestamp
     } else {
       this.$timestamp.innerHTML = time.toLocaleString('ru', {
         hour: 'numeric',
         minute: 'numeric',
-      });
+      })
     }
   }
 }
 
-customElements.define('message-item', MessageItem);
+customElements.define('message-item', MessageItem)

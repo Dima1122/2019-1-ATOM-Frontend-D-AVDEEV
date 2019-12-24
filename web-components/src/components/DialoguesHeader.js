@@ -1,4 +1,4 @@
-const template = document.createElement('template');
+const template = document.createElement('template')
 template.innerHTML = `
 <style>
     *{
@@ -134,15 +134,14 @@ class="checkbox4 visuallyHidden">
         </label>
 <div class='messenger'>Messenger</div>
 <div class='searchButton'></div>
-`;
-
+`
 
 class DialoguesHeader extends HTMLElement {
   constructor() {
-    super();
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._shadowRoot.appendChild(template.content.cloneNode(true));
+    super()
+    this._shadowRoot = this.attachShadow({ mode: 'open' })
+    this._shadowRoot.appendChild(template.content.cloneNode(true))
   }
 }
 
-customElements.define('dialogues-header', DialoguesHeader);
+customElements.define('dialogues-header', DialoguesHeader)

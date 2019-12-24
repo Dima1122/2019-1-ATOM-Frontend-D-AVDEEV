@@ -20,6 +20,9 @@
   padding: 10px;
   max-width: 80%;
   word-break: break-word;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-name: appearance;
 }
 
 .message {
@@ -83,6 +86,16 @@
 
 .audioStop {
   background-image: url(https://image.flaticon.com/icons/svg/18/18141.svg);
+
+  @keyframes appearance {
+    from {
+      right: 100%;
+    }
+
+    to {
+      right: 5px;
+    }
+  }
 }
 
 .messageItem :hover {

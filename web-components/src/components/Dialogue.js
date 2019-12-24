@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const template = document.createElement('template');
+const template = document.createElement('template')
 template.innerHTML = `
 <style>
     :host {
@@ -93,35 +93,35 @@ template.innerHTML = `
       </div>
     </div>
 </div>
-`;
+`
 
 class DialogueItem extends HTMLElement {
   constructor() {
-    super();
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._shadowRoot.appendChild(template.content.cloneNode(true));
+    super()
+    this._shadowRoot = this.attachShadow({ mode: 'open' })
+    this._shadowRoot.appendChild(template.content.cloneNode(true))
 
-    this.$dialogue = this._shadowRoot.querySelector('.dialogue');
+    this.$dialogue = this._shadowRoot.querySelector('.dialogue')
 
-    this.$name = this._shadowRoot.querySelector('.name');
-    this.$message = this._shadowRoot.querySelector('.message');
-    this.$timestamp = this._shadowRoot.querySelector('.time');
+    this.$name = this._shadowRoot.querySelector('.name')
+    this.$message = this._shadowRoot.querySelector('.message')
+    this.$timestamp = this._shadowRoot.querySelector('.time')
   }
 
   static get observedAttributes() {
-    return ['personname', 'dialogueid'];
+    return ['personname', 'dialogueid']
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     // eslint-disable-next-line default-case
     switch (name) {
       case 'personname':
-        this.personName = newValue;
-        this.$name.innerHTML = this.personName;
-        break;
+        this.personName = newValue
+        this.$name.innerHTML = this.personName
+        break
       case 'dialogueid':
-        this.dialogueID = newValue;
-        break;
+        this.dialogueID = newValue
+        break
     }
   }
 
@@ -130,23 +130,23 @@ class DialogueItem extends HTMLElement {
       name: this.$name.innerHTML,
       message: this.$message.innerHTML,
       timestamp: this.$timestamp.innerHTML,
-    };
-    return this.dialogueObject;
+    }
+    return this.dialogueObject
   }
 
   _renderMessage() {
-    const msgs = JSON.parse(localStorage.getItem(`dialogue#${this.dialogueID}-${this.personName}`));
+    const msgs = JSON.parse(localStorage.getItem(`dialogue#${this.dialogueID}-${this.personName}`))
     if (msgs === null) {
       this.$timestamp.innerHTML = new Date().toLocaleString('ru', {
         hour: 'numeric',
         minute: 'numeric',
-      });
+      })
     } else {
-      this.dialogue = msgs[msgs.length - 1];
-      this.$message.innerHTML = this.dialogue.message;
-      this.$timestamp.innerHTML = this.dialogue.timestamp;
+      this.dialogue = msgs[msgs.length - 1]
+      this.$message.innerHTML = this.dialogue.message
+      this.$timestamp.innerHTML = this.dialogue.timestamp
     }
   }
 }
 
-customElements.define('dialogue-item', DialogueItem);
+customElements.define('dialogue-item', DialogueItem)

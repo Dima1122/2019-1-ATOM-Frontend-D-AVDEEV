@@ -16,9 +16,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-  ],
+  plugins: ['react'],
   rules: {
     indent: 0,
     'no-underscore-dangle': 0,
@@ -26,7 +24,7 @@ module.exports = {
     'prefer-const': 0,
     'no-var': 0,
     'vars-on-top': 0,
-    'camelcase': 0,
+    camelcase: 0,
     'default-case': 0,
   },
-};
+}

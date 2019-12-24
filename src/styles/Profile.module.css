@@ -4,7 +4,7 @@
   font-family: sans-serif;
   background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(41, 128, 185), rgb(109, 213, 250), rgb(255, 255, 255))
     repeat scroll 0% 0%;
-  display: flex;
+  display: none;
   flex-direction: column;
   position: absolute;
   z-index: 1;
