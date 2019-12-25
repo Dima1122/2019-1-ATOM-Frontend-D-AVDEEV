@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from '../styles/FormInput.module.css'
-import { findMe } from '../lib/findMe'
 
 export function FormInput(props) {
   const input = React.useRef(null)
@@ -129,37 +128,27 @@ export function FormInput(props) {
     ))
   }
 
+  function getMyPosition(callbackSuccess, callbackError = null) {
+    if ('geolocation' in navigator) {
+      const geoOptions = {
+        enableHighAccuracy: true,
+        maximumAge: 30000,
+        timeout: 27000,
+      }
+
+      navigator.geolocation.getCurrentPosition(callbackSuccess, console.log, geoOptions)
+    } else if (callbackError) {
+      callbackError('Permisition denied')
+    }
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.formInput}>
-        <div
-          onClick={() => {
-            !dropOutStyle &&
-              setDropOutStyle({
-                height: '120px',
-              })
-            dropOutStyle && setDropOutStyle(null)
-          }}
-          className={styles.attachButton}
-        />
-        <input
-          onChange={(event) => {
-            if (event.target.value.length > 0) {
-              setSendButtonType('send')
-            } else if (event.target.value.length === 0) {
-              setSendButtonType('mic')
-            }
-          }}
-          onKeyPress={onKeyPress}
-          ref={input}
-          placeholder="Enter message..."
-        />
-        <SendButton submit={onSubmit} type={sendButtonType} />
         <div className={styles.dropOut} style={dropOutStyle}>
           <div className={styles.dropOutContainer}>
             <div
               onClick={() => {
-                setDropOutStyle(null)
                 img.current.click()
               }}
               className={`${styles.attachItem} ${styles.attachImage}`}
@@ -181,8 +170,7 @@ export function FormInput(props) {
             </div>
             <div
               onClick={() => {
-                setDropOutStyle(null)
-                findMe((position) => {
+                getMyPosition((position) => {
                   const { latitude, longitude } = position.coords
                   const response = `https://yandex.ru/maps/?ll=${longitude}%2C${latitude}&z=15`
                   setAttachments({
@@ -202,6 +190,29 @@ export function FormInput(props) {
             />
           </div>
         </div>
+        <div
+          onClick={() => {
+            !dropOutStyle &&
+              setDropOutStyle({
+                width: '120px',
+              })
+            dropOutStyle && setDropOutStyle(null)
+          }}
+          className={styles.attachButton}
+        />
+        <input
+          onChange={(event) => {
+            if (event.target.value.length > 0) {
+              setSendButtonType('send')
+            } else if (event.target.value.length === 0) {
+              setSendButtonType('mic')
+            }
+          }}
+          onKeyPress={onKeyPress}
+          ref={input}
+          placeholder="Enter message..."
+        />
+        <SendButton submit={onSubmit} type={sendButtonType} />
       </div>
       <div style={attachmentsBoxStyles} className={styles.additionsBox}>
         <ul className={styles.additionsBoxUl}>{list}</ul>
