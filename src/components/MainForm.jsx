@@ -69,7 +69,6 @@ export class MainForm extends React.Component {
 
   messageHandler(value, chatTimestamp = null, chatId = null, attachments = null) {
     let { currentDialogue, messages } = this.state
-    // eslint-disable-next-line no-unused-vars
     let isAttached = false
     if (!messages) {
       messages = {}
