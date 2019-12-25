@@ -71,33 +71,6 @@
   margin-bottom: 10px;
 }
 
-.audioStatus {
-  width: 70px;
-  height: 30px;
-  filter: invert(1);
-  background-repeat: no-repeat;
-  background-position: center center;
-  cursor: pointer;
-}
-
-.audioPlay {
-  background-image: url(https://image.flaticon.com/icons/svg/149/149657.svg);
-}
-
-.audioStop {
-  background-image: url(https://image.flaticon.com/icons/svg/18/18141.svg);
-
-  @keyframes appearance {
-    from {
-      right: 100%;
-    }
-
-    to {
-      right: 5px;
-    }
-  }
-}
-
 .messageItem :hover {
   background-color: rgb(189, 167, 43);
 }

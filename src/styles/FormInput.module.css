@@ -131,7 +131,6 @@ input {
   background-size: 25px;
   background-repeat: no-repeat;
   margin: 0 10px 0 10px;
-  filter: invert(1);
 }
 
 .attachImage {
