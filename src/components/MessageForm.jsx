@@ -50,11 +50,7 @@ export function MessageForm(props) {
       <div className={styles.inputForm}>
         <MyContext.Consumer>
           {(value) => (
-            <FormInput
-              mediaRecorder={value.state.mediaRecorder}
-              messageHandler={value.messageHandler.bind(value)}
-              dragFiles={[dragFiles, setDragFiles]}
-            />
+            <FormInput messageHandler={value.messageHandler.bind(value)} dragFiles={[dragFiles, setDragFiles]} />
           )}
         </MyContext.Consumer>
       </div>
