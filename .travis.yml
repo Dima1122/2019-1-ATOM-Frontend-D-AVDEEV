@@ -1,9 +1,6 @@
 language: node_js
 node_js:
   - 'stable'
-before_install:
-  - cd exam
-  - npm install
 cache:
   directories:
     - node_modules
@@ -13,9 +10,10 @@ deploy:
   provider: pages
   skip_cleanup: true
   github_token: $repo_token
-  local_dir: exam/build
+  local_dir: build
   on:
     branch:
       - master
       - devel
+      - hw_7_devel
       - exam

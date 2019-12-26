@@ -6,7 +6,7 @@ export function ChatHeader(props) {
   const { details, clickBack } = props
   return (
     <div className={styles.header}>
-      <Link to={'/'}>
+      <Link to="/">
         <button onClick={clickBack} className={styles.Backbutton}>
           Back
         </button>

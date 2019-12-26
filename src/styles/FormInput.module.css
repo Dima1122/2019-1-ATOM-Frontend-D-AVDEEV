@@ -14,15 +14,15 @@ input {
   background-color: transparent;
 }
 
-.clip {
+.attachButton {
   height: 32px;
   width: 40px;
-  margin: 5px 15px;
-  background: url(https://image.flaticon.com/icons/svg/116/116312.svg);
+  margin: 10px 1px;
+  background: url(https://image.flaticon.com/icons/svg/130/130884.svg);
   background-repeat: no-repeat;
 }
 
-.btn {
+.sendButton {
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -32,16 +32,17 @@ input {
   color: rgb(255, 255, 255);
   font-size: 15px;
   text-transform: uppercase;
+  text-align: center;
   background: #389ed5;
   border-width: 0;
   box-shadow: 5px 5px 0 #532831;
   outline: none;
   cursor: pointer;
-  transition: 1.5s;
+  transition: 0.1s;
 }
 
-.btn:before,
-.btn:after {
+.sendButton:before,
+.sendButton:after {
   content: '';
   position: absolute;
   height: 200px;
@@ -55,21 +56,146 @@ input {
   transform: scale(0);
 }
 
-.btn:before {
+.sendButton:before {
   background: #ffeede;
   transition: 0.8s ease-out;
 }
 
-.btn:after {
+.sendButton:after {
   transition: 0.4s ease-in 0.3s;
 }
 
-.btn:hover {
+.sendButton:hover {
   color: #532831;
 }
 
-.btn:hover:before,
-.btn:hover:after {
+.sendButton:hover:before,
+.sendButton:hover:after {
   opacity: 1;
   transform: scale(4);
+}
+
+.micButton {
+  background: url(https://image.flaticon.com/icons/svg/25/25682.svg) no-repeat center center;
+  background-size: 90%;
+}
+
+.cancelButton {
+  background: url(https://image.flaticon.com/icons/svg/151/151882.svg) no-repeat center center;
+  background-size: 90%;
+}
+
+.inputButton {
+  height: 100%;
+  width: 30px;
+  margin: 0 15px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition-duration: 0.01s;
+  z-index: 1;
+  top: 50%;
+}
+
+.inputButton:hover {
+  opacity: 1;
+}
+
+.inputButton:active {
+  opacity: 0.7;
+}
+
+.dropOut {
+  height: 50px;
+  width: 0px;
+  transition-duration: 0.3s;
+  background-color: rgba(7, 27, 175, 0.2);
+  position: relative;
+  bottom: 0px;
+  left: 0px;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.dropOutContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.attachItem {
+  width: 30px;
+  height: 100%;
+  background-position: center center;
+  background-size: 30px;
+  background-repeat: no-repeat;
+  margin: 0 10px 0 10px;
+}
+
+.attachImage {
+  background-image: url(https://image.flaticon.com/icons/svg/149/149092.svg);
+}
+
+.attachGeo {
+  background-image: url(https://image.flaticon.com/icons/svg/1180/1180805.svg);
+}
+
+.additionsBox {
+  width: 100%;
+  height: 0;
+  background-color: #29384b;
+  transition-duration: 0.2s;
+  overflow-x: auto;
+}
+
+.additionsBoxUl {
+  display: flex;
+  height: 100%;
+}
+
+.additionsBoxUl li {
+  width: 120px;
+  height: 100%;
+  padding: 10px;
+  padding-left: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  position: relative;
+  text-align: center;
+}
+
+.additionsBoxUl li:nth-child(1) {
+  padding-left: 10px !important;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: #29384b;
+  box-shadow: 0 0 5px 0 #151716;
+}
+
+.imageName {
+  font-size: var(--fontMinMinSize);
+  white-space: nowrap;
+  width: 80px;
+  margin: 5px 10px 0 10px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.remove {
+  padding: 0px 7px 3px 7px;
+  font-weight: bold;
+  border-radius: 40px;
+  background-color: rgb(80, 99, 124);
+  box-shadow: 0 0 5px 0 #151716;
+  top: 5px;
+  right: 5px;
+  display: inline;
+  position: absolute;
+  cursor: pointer;
 }

@@ -5,7 +5,6 @@ import { DialogueItem } from './DialogueItem'
 import { CreateDialogueButton } from './CreateDialogueButton'
 import MyContext from './MyContext.Context'
 
-// eslint-disable-next-line import/prefer-default-export
 export function DialogueForm(props) {
   const { chats } = props
 
